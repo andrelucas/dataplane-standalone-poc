@@ -5,14 +5,29 @@
 This is tested on Fedora 37. It's containerised and any Red Hat-like system
 with a fully-working Podman installation should work equally well.
 
+We recommend SELinux not be in `Enforcing` mode. This is a limitation of the
+container used here and not Ondat's data plane which works well in production
+SELinux-enforcing environments.
+
 The `target_core_user` kernel module must be installed.
+
+Install podman, if not already present:
 
 ```sh
 $ sudo dnf -y install podman-*
 $ mkdir -p ~/git
 ```
 
-## Grab the poc runner
+## Get prerequisite files from Ondat
+
+Ondat needs to provide:
+
+| File(s) | Purpose |
+| - | - |
+| `ca.crt`, `ca.pem` | CA certificate and key for the remote Ondat cluster. |
+| `staging.tgz` | Data plane build artifacts, will be copied into the container. |
+
+## Grab the PoC runner
 
 ```sh
 $ cd ~/git
@@ -43,7 +58,8 @@ $ make up shell
 ## Connect to the remote drive
 
 ```sh
-# Still logged in to the container via `make shell`, above.
+# Still logged in to the container via `make shell`, above. All these
+# variables need to be filled in with appropriate values, none are optional.
 $ export \
     CONSUMER_COUNT=... \
     DEPLOYMENT_UUID=... \
