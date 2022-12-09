@@ -9,7 +9,7 @@ We recommend SELinux not be in `Enforcing` mode. This is a limitation of the
 container used here and not Ondat's data plane which works well in production
 SELinux-enforcing environments.
 
-The `target_core_user` kernel module must be installed.
+The `target_core_user` module must be loaded into the running kernel.
 
 Install podman, if not already present:
 
