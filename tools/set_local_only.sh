@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cat <<EOF
+unset EXPOSE_CLIENT EXPOSE_SERVER
+unset CLIENT_IP_OVERRIDE SERVER_IP_OVERRIDE
+unset
+EOF
