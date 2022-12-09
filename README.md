@@ -53,4 +53,42 @@ $ export \
     SIZE_BYTES=...
 
 $ make poc-connect
+
+# This will create a SCSI device on the local host system. Get its SCSI
+# device ID, e.g. `/dev/sda'.
+
+$ dmesg | tail -30
 ```
+
+## Use the volume
+
+```sh
+$ sudo mount SCSI-DEVICE-PATH /mnt
+$ ls -al /mnt
+...
+
+```
+
+## Ondat internal steps
+
+### Generate the staging tarball
+
+We need to generate a tarball to give to the client.
+
+```sh
+$ cd git/data
+$ make rshell
+...
+# scripts/build.sh --release --test --inttest --install
+... time passes ...
+# CTRL-D
+
+$ cd test
+$ make stage-to-tarball
+# This leaves staging.tgz in test/.
+```
+
+### CA cert and key
+
+The extraction procedure is internal-use only. We need `ca.crt` and `ca.key`
+from the target cluster to operate correctly.
