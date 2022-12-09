@@ -161,7 +161,6 @@ cleanconfig:
 # reconfig forces a new configuration upload.
 reconfig: cleanconfig config
 
-
 $(CONFIG_FILE): run/genconfig.sh
 	@echo "-- Generating runtime configuration"
 	@rm -f $@
@@ -228,4 +227,3 @@ strip:
 		find $(STAGING_DIR)/libexec/inttest -type f -a -name "test_*" | xargs strip && \
 		find $(STAGING_DIR)/bin -type f | xargs strip && \
 		find $(STAGING_DIR)/sbin -type f -a -not -name "dataplane" | xargs strip
-

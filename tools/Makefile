@@ -48,3 +48,28 @@ config-resolver:
 
 config-ssh:
 	@runtime/config-ssh.sh
+
+#############################################################################
+
+# Standalone PoC support.
+
+CONSUMER_COUNT				?= NOTSET
+DEPLOYMENT_UUID				?= NOTSET
+PRESENTATION_FILENAME		?= NOTSET
+PRESENTATION_UUID			?= NOTSET
+REMOTE_NODE_IP				?= NOTSET
+REMOTE_NODE_UUID			?= NOTSET
+SIZE_BYTES					?= NOTSET
+
+poc-connect:
+	/staging/bin/supctl \
+		ConfigurePresentation \
+			--config.deployment_uuid $(DEPLOYMENT_UUID) \
+			--config.presentation_uuid $(PRESENTATION_UUID) \
+			--config.cc.consumer_count $(CONSUMER_COUNT) \
+			--config.filename $(PRESENTATION_FILENAME) \
+			--config.size $(SIZE_BYTES) \
+			--config.opt_node_config.uuid $(REMOTE_NODE_UUID) \
+			--config.opt_node_config.hostname $(REMOTE_NODE_IP) \
+			--config.opt_node_config.port 5703 \
+			--config.opt_node_config.tls_enabled true

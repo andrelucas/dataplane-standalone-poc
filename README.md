@@ -37,5 +37,20 @@ image, and then build the test environment.
 
 ```sh
 # Kill any existing environment, create a new one, and log into it.
-$ make down up shell
+$ make up shell
+```
+
+## Connect to the remote drive
+
+```sh
+# Still logged in to the container via `make shell`, above.
+$ export \
+    CONSUMER_COUNT=... \
+    DEPLOYMENT_UUID=... \
+    PRESENTATION_FILENAME=... \
+    PRESENTATION_UUID=... \
+    REMOTE_NODE_IP=... \
+    SIZE_BYTES=...
+
+$ make poc-connect
 ```
