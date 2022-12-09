@@ -214,6 +214,15 @@ stage:
 	@# rsync(1) is very sensitive to the trailing slash, be careful.
 	rsync -a --delete --partial $(DPINSTALLDIR)/* $(STAGING_DIR)/
 
+STAGING_TARBALL	= $(CURDIR)/staging.tgz
+
+stage-to-tarball: stage
+	cd $(STAGING_DIR) && tar czf $(STAGING_TARBALL) *
+
+stage-from-tarball: stage
+	rm -r $(STAGING_DIR)/*
+	tar -C $(STAGING_DIR) -xzf $(STAGING_TARBALL)
+
 strip:
 	test "$(STRIP_TEST_BINARIES)" = true && \
 		find $(STAGING_DIR)/libexec/inttest -type f -a -name "test_*" | xargs strip && \
