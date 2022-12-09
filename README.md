@@ -23,15 +23,19 @@ $ cd dps
 ## Copy necessary files
 
 ```sh
-$ cp PATH/TO/ca.{crt,key} cat/
+# Matching CA certificate and key.
+$ cp PATH/TO/ca.{crt,key} ca/
+# Dataplane artifact binaries.
 $ cp PATH/TO/staging.tgz .
+$ make stage-from-tarball
 ```
 
 ## Build and run
 
-This will take a while, as it will download a fairly big Docker image, and
-then build the test environment.
+This will take a while the first time, as it will download a fairly big Docker
+image, and then build the test environment.
 
 ```sh
-$ make up
+# Kill any existing environment, create a new one, and log into it.
+$ make down up shell
 ```

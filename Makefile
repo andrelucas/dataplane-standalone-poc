@@ -85,7 +85,7 @@ NODE_OPTIONS	+= -v /lib/modules:/lib/modules
 NODE_OPTIONS	+= -v $(STAGING_DIR):$(CONTAINER_STAGING)
 NODE_OPTIONS	+= --privileged --cap-add=SYS_ADMIN
 
-NODE_EXTRA		= -v $(PWD)/..:/src
+#NODE_EXTRA		= -v $(PWD)/..:/src
 
 CLIENT_OPTIONS	?=
 SERVER_OPTIONS	?=
