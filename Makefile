@@ -221,8 +221,8 @@ STAGING_TARBALL	= $(CURDIR)/staging.tgz
 stage-to-tarball: stage
 	cd $(STAGING_DIR) && tar czf $(STAGING_TARBALL) *
 
-stage-from-tarball: stage
-	rm -r $(STAGING_DIR)/*
+stage-from-tarball:
+	rm -rf $(STAGING_DIR)/*
 	tar -C $(STAGING_DIR) -xzf $(STAGING_TARBALL)
 
 strip:
