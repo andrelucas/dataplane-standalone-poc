@@ -56,12 +56,12 @@ image, and then build the test environment.
 $ make up shell
 ```
 
-To reassure yourself this is running correctly, you can do a brief environment
+If (and only if) you're not running SELinux in enforcing mode: To reassure yourself this is running correctly, you can do a brief environment
 check. This will stop and start some services (references to the 'remote' here
 aren't relevant to this PoC).
 
 ```sh
-## Inside the client container.
+## Inside the client container. This won't work in SELinux in Enforcing mode.
 # cd /test
 # ./test_init
 
