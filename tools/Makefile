@@ -62,8 +62,9 @@ REMOTE_NODE_UUID			?= NOTSET
 SIZE_BYTES					?= NOTSET
 
 poc-connect:
-	/staging/bin/supctl \
-		ConfigurePresentation \
+	env HOSTNAME_OVERRIDE=client \
+		/staging/bin/supctl \
+			ConfigurePresentation \
 			--config.deployment_uuid $(DEPLOYMENT_UUID) \
 			--config.presentation_uuid $(PRESENTATION_UUID) \
 			--config.cc.consumer_count $(CONSUMER_COUNT) \
@@ -73,3 +74,11 @@ poc-connect:
 			--config.opt_node_config.hostname $(REMOTE_NODE_IP) \
 			--config.opt_node_config.port 5703 \
 			--config.opt_node_config.tls_enabled true
+
+# This target is an easy way to check if we've configured everything
+# properly, so we can connect to the local data plane's supervisor module.
+# It'll return '{}' with one (unimportant) warning message.
+#
+poc-checksup:
+	env HOSTNAME_OVERRIDE=client \
+		/staging/bin/supctl Status
