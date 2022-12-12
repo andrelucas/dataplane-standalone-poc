@@ -57,14 +57,19 @@ $ make up shell
 
 ## Connect to the remote drive
 
+You need to know a few things about the remote volume:
+
+| Variable | Description |
+| - | - |
+| `DEPLOYMENT_UUID` | The Ondat volume's current master deployment. |
+| `REMOTE_NODE_IP` | The IP address on which we can connect to the master deployment's node container. |
+| `SIZE_BYTES` | The Ondat volume's size in bytes. |
+
 ```sh
 # Still logged in to the container via `make shell`, above. All these
 # variables need to be filled in with appropriate values, none are optional.
 $ export \
-    CONSUMER_COUNT=... \
     DEPLOYMENT_UUID=... \
-    PRESENTATION_FILENAME=... \
-    PRESENTATION_UUID=... \
     REMOTE_NODE_IP=... \
     SIZE_BYTES=...
 
