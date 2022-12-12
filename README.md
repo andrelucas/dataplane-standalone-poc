@@ -9,7 +9,9 @@ We recommend SELinux not be in `Enforcing` mode. This is a limitation of the
 container used here and not Ondat's data plane which works well in production
 SELinux-enforcing environments.
 
-The `target_core_user` module must be loaded into the running kernel.
+The `target_core_user` kernel module must be loaded into the running kernel
+with `modprobe target_core_user`. In standard Fedora 37 this is in found in
+package `kernel-modules`.
 
 Install podman, if not already present:
 
@@ -77,12 +79,13 @@ You need to know a few things about the remote volume:
 | - | - |
 | `DEPLOYMENT_UUID` | The Ondat volume's current master deployment. |
 | `REMOTE_NODE_IP` | The IP address on which we can connect to the master deployment's node container. |
+| `REMOTE_NODE_UUID` | The Ondat node UUID. |
 | `SIZE_BYTES` | The Ondat volume's size in bytes. |
 
 ```sh
 ## Logged in to the container via `make shell`, above.
 
-## Start the data plane.
+## Start the data plane. DO NOT FORGET TO DO THIS :-)
 root% systemctl start s-dataplane
 
 ## All these variables need to be filled in with appropriate values,
@@ -90,6 +93,7 @@ root% systemctl start s-dataplane
 root% export \
     DEPLOYMENT_UUID=... \
     REMOTE_NODE_IP=... \
+    REMOTE_NODE_UUID=... \
     SIZE_BYTES=...
 
 root% make poc-connect
@@ -110,7 +114,8 @@ $ ls -al /mnt
 
 ### Generate the staging tarball
 
-We need to generate a tarball to give to the client.
+We need to generate a tarball to give to the client. This takes a long time,
+C++ compilation is slow. Normally we'd just give them a tarball.
 
 ```sh
 $ cd git/data

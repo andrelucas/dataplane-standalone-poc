@@ -56,7 +56,7 @@ config-ssh:
 CONSUMER_COUNT				?= $(shell date '+%s')
 DEPLOYMENT_UUID				?= NOTSET
 PRESENTATION_FILENAME		?= my_volume
-PRESENTATION_UUID			?= badc0ffe-e0dd-f00d-0000-00000001
+PRESENTATION_UUID			?= badc0ffe-e0dd-f00d-0000-000000000001
 REMOTE_NODE_IP				?= NOTSET
 REMOTE_NODE_UUID			?= NOTSET
 SIZE_BYTES					?= NOTSET
@@ -73,7 +73,8 @@ poc-connect:
 			--config.opt_node_config.uuid $(REMOTE_NODE_UUID) \
 			--config.opt_node_config.hostname $(REMOTE_NODE_IP) \
 			--config.opt_node_config.port 5703 \
-			--config.opt_node_config.tls_enabled true
+			--config.opt_node_config.tls_enabled true \
+			--config.opt_node_config.opt_verify_hostname storageos:node:$(REMOTE_NODE_UUID)
 
 # This target is an easy way to check if we've configured everything
 # properly, so we can connect to the local data plane's supervisor module.
