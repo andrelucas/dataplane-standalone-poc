@@ -80,18 +80,20 @@ You need to know a few things about the remote volume:
 | `SIZE_BYTES` | The Ondat volume's size in bytes. |
 
 ```sh
-# Still logged in to the container via `make shell`, above. All these
-# variables need to be filled in with appropriate values, none are optional.
-$ export \
+## Logged in to the container via `make shell`, above.
+
+## Start the data plane.
+root% systemctl start s-dataplane
+
+## All these variables need to be filled in with appropriate values,
+## none are optional.
+root% export \
     DEPLOYMENT_UUID=... \
     REMOTE_NODE_IP=... \
     SIZE_BYTES=...
 
-$ make poc-connect
+root% make poc-connect
 
-# This will create a SCSI device on the local host system.
-
-$ dmesg | tail -30
 ```
 
 ## Use the volume
