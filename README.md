@@ -51,8 +51,22 @@ This will take a while the first time, as it will download a fairly big Docker
 image, and then build the test environment.
 
 ```sh
-# Kill any existing environment, create a new one, and log into it.
+# Kill any existing environment, create a new one, and log into the client
+# container.
 $ make up shell
+```
+
+To reassure yourself this is running correctly, you can do a brief environment
+check. This will stop and start some services (references to the 'remote' here
+aren't relevant to this PoC).
+
+```sh
+## Inside the client container.
+# cd /test
+# ./test_init
+
+## Back to the original directory.
+# cd /tools
 ```
 
 ## Connect to the remote drive
@@ -75,8 +89,7 @@ $ export \
 
 $ make poc-connect
 
-# This will create a SCSI device on the local host system. Get its SCSI
-# device ID, e.g. `/dev/sda'.
+# This will create a SCSI device on the local host system.
 
 $ dmesg | tail -30
 ```
@@ -84,7 +97,8 @@ $ dmesg | tail -30
 ## Use the volume
 
 ```sh
-$ sudo mount SCSI-DEVICE-PATH /mnt
+# Back on the host.
+$ sudo mount /var/lib/storageos/volumes/my_volume /mnt
 $ ls -al /mnt
 ...
 
